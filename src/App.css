@@ -33,123 +33,75 @@
   backdrop-filter: blur(10px);
 }
 
+.target-date {
+  margin-bottom: 1rem;
+}
+
+.target-date h2 {
+  font-size: 1.5rem;
+  color: #888;
+  margin: 0;
+  font-weight: 400;
+}
+
 .time-display {
-  font-size: 4rem;
-  font-weight: bold;
-  font-family: 'Courier New', monospace;
-  color: #646cff;
-  text-shadow: 0 0 20px rgba(100, 108, 255, 0.3);
-}
-
-.time-unit {
-  display: inline-block;
-  min-width: 2.5ch;
-  text-align: center;
-}
-
-.separator {
-  margin: 0 0.5rem;
-  color: #61dafb;
-}
-
-.time-inputs {
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
+  gap: 1rem;
+  font-family: 'Courier New', monospace;
+  flex-wrap: wrap;
 }
 
-.input-group {
+.time-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
 }
 
-.input-group label {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #888;
-}
-
-.input-group input {
-  width: 60px;
-  padding: 0.5rem;
+.time-unit {
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: #646cff;
+  text-shadow: 0 0 20px rgba(100, 108, 255, 0.3);
+  min-width: 2.5ch;
   text-align: center;
-  border: 1px solid #646cff;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.1);
-  color: inherit;
-  font-size: 1.1rem;
+  display: block;
 }
 
-.input-group input:focus {
-  outline: none;
-  border-color: #61dafb;
-  box-shadow: 0 0 0 2px rgba(97, 218, 251, 0.2);
-}
-
-.input-group input:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.controls {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.controls button {
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+.time-label {
+  font-size: 0.9rem;
+  color: #888;
   font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  min-width: 80px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
-.start-btn {
-  background: #4CAF50;
-  color: white;
+.separator {
+  font-size: 2rem;
+  color: #61dafb;
+  font-weight: bold;
+  margin: 0 0.5rem;
 }
 
-.start-btn:hover:not(:disabled) {
-  background: #45a049;
-  transform: translateY(-2px);
+.finished-message {
+  text-align: center;
+  color: #4CAF50;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+  animation: celebration 2s ease-in-out infinite alternate;
 }
 
-.pause-btn {
-  background: #ff9800;
-  color: white;
+@keyframes celebration {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
 }
 
-.pause-btn:hover:not(:disabled) {
-  background: #f57c00;
-  transform: translateY(-2px);
-}
-
-.reset-btn {
-  background: #f44336;
-  color: white;
-}
-
-.reset-btn:hover:not(:disabled) {
-  background: #da190b;
-  transform: translateY(-2px);
-}
-
-.controls button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
-}
 
 @media (max-width: 768px) {
-  .time-display {
+  .time-unit {
     font-size: 2.5rem;
   }
   
@@ -159,5 +111,17 @@
   
   .countdown-timer {
     padding: 1rem;
+  }
+  
+  .time-display {
+    gap: 0.5rem;
+  }
+  
+  .separator {
+    font-size: 1.5rem;
+  }
+  
+  .target-date h2 {
+    font-size: 1.2rem;
   }
 }

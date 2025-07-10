@@ -1,161 +1,79 @@
 import { useState, useEffect } from 'react';
 
-interface CountdownTimerProps {
-  initialHours?: number;
-  initialMinutes?: number;
-  initialSeconds?: number;
-}
+export const CountdownTimer: React.FC = () => {
+  const [days, setDays] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [isFinished, setIsFinished] = useState(false);
 
-export const CountdownTimer: React.FC<CountdownTimerProps> = ({
-  initialHours = 0,
-  initialMinutes = 5,
-  initialSeconds = 0
-}) => {
-  const [hours, setHours] = useState(initialHours);
-  const [minutes, setMinutes] = useState(initialMinutes);
-  const [seconds, setSeconds] = useState(initialSeconds);
-  const [isRunning, setIsRunning] = useState(false);
-  const [totalSeconds, setTotalSeconds] = useState(
-    initialHours * 3600 + initialMinutes * 60 + initialSeconds
-  );
+  const targetDate = new Date('2025-07-20T00:00:00').getTime();
 
   useEffect(() => {
-    let interval: number | undefined;
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
 
-    if (isRunning && totalSeconds > 0) {
-      interval = setInterval(() => {
-        setTotalSeconds((prev) => {
-          const newTotal = prev - 1;
-          if (newTotal <= 0) {
-            setIsRunning(false);
-            alert('Time\'s up!');
-            return 0;
-          }
-          return newTotal;
-        });
-      }, 1000);
-    }
+      if (distance < 0) {
+        setIsFinished(true);
+        setDays(0);
+        setHours(0);
+        setMinutes(0);
+        setSeconds(0);
+        return;
+      }
 
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [isRunning, totalSeconds]);
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  useEffect(() => {
-    const h = Math.floor(totalSeconds / 3600);
-    const m = Math.floor((totalSeconds % 3600) / 60);
-    const s = totalSeconds % 60;
-    setHours(h);
-    setMinutes(m);
-    setSeconds(s);
-  }, [totalSeconds]);
+      setDays(days);
+      setHours(hours);
+      setMinutes(minutes);
+      setSeconds(seconds);
+    }, 1000);
 
-  const handleStart = () => {
-    if (totalSeconds > 0) {
-      setIsRunning(true);
-    }
-  };
-
-  const handlePause = () => {
-    setIsRunning(false);
-  };
-
-  const handleReset = () => {
-    setIsRunning(false);
-    const newTotal = initialHours * 3600 + initialMinutes * 60 + initialSeconds;
-    setTotalSeconds(newTotal);
-  };
-
-  const handleTimeChange = (type: 'hours' | 'minutes' | 'seconds', value: number) => {
-    if (!isRunning) {
-      let newHours = hours;
-      let newMinutes = minutes;
-      let newSeconds = seconds;
-
-      if (type === 'hours') newHours = Math.max(0, Math.min(23, value));
-      if (type === 'minutes') newMinutes = Math.max(0, Math.min(59, value));
-      if (type === 'seconds') newSeconds = Math.max(0, Math.min(59, value));
-
-      setTotalSeconds(newHours * 3600 + newMinutes * 60 + newSeconds);
-    }
-  };
+    return () => clearInterval(interval);
+  }, [targetDate]);
 
   const formatTime = (time: number) => time.toString().padStart(2, '0');
 
   return (
     <div className="countdown-timer">
-      <div className="time-display">
-        <span className="time-unit">
-          {formatTime(hours)}
-        </span>
-        <span className="separator">:</span>
-        <span className="time-unit">
-          {formatTime(minutes)}
-        </span>
-        <span className="separator">:</span>
-        <span className="time-unit">
-          {formatTime(seconds)}
-        </span>
+      <div className="target-date">
+        <h2>Countdown to July 20, 2025</h2>
       </div>
-
-      <div className="time-inputs">
-        <div className="input-group">
-          <label>Hours</label>
-          <input
-            type="number"
-            min="0"
-            max="23"
-            value={hours}
-            onChange={(e) => handleTimeChange('hours', parseInt(e.target.value) || 0)}
-            disabled={isRunning}
-          />
+      
+      {isFinished ? (
+        <div className="finished-message">
+          <h3>🎉 The countdown is complete! 🎉</h3>
         </div>
-        <div className="input-group">
-          <label>Minutes</label>
-          <input
-            type="number"
-            min="0"
-            max="59"
-            value={minutes}
-            onChange={(e) => handleTimeChange('minutes', parseInt(e.target.value) || 0)}
-            disabled={isRunning}
-          />
-        </div>
-        <div className="input-group">
-          <label>Seconds</label>
-          <input
-            type="number"
-            min="0"
-            max="59"
-            value={seconds}
-            onChange={(e) => handleTimeChange('seconds', parseInt(e.target.value) || 0)}
-            disabled={isRunning}
-          />
-        </div>
-      </div>
-
-      <div className="controls">
-        <button 
-          onClick={handleStart} 
-          disabled={isRunning || totalSeconds === 0}
-          className="start-btn"
-        >
-          Start
-        </button>
-        <button 
-          onClick={handlePause} 
-          disabled={!isRunning}
-          className="pause-btn"
-        >
-          Pause
-        </button>
-        <button 
-          onClick={handleReset}
-          className="reset-btn"
-        >
-          Reset
-        </button>
-      </div>
+      ) : (
+        <>
+          <div className="time-display">
+            <div className="time-section">
+              <span className="time-unit">{formatTime(days)}</span>
+              <span className="time-label">Days</span>
+            </div>
+            <span className="separator">:</span>
+            <div className="time-section">
+              <span className="time-unit">{formatTime(hours)}</span>
+              <span className="time-label">Hours</span>
+            </div>
+            <span className="separator">:</span>
+            <div className="time-section">
+              <span className="time-unit">{formatTime(minutes)}</span>
+              <span className="time-label">Minutes</span>
+            </div>
+            <span className="separator">:</span>
+            <div className="time-section">
+              <span className="time-unit">{formatTime(seconds)}</span>
+              <span className="time-label">Seconds</span>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
