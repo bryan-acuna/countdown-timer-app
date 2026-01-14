@@ -117,7 +117,7 @@ function App() {
 
       {/* Footer */}
       <footer className="iron-footer">
-        <p>POWERED BY STARK INDUSTRIES</p>
+        <p>POWERED BY BRYAN ACUNA</p>
         <div className="footer-line"></div>
       </footer>
     </div>
