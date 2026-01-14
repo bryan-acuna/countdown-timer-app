@@ -420,6 +420,84 @@
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
+/* Tabs */
+.tabs-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+}
+
+.tab-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: var(--iron-metal);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #888;
+}
+
+.tab-button:hover {
+  border-color: var(--iron-gold);
+  background: rgba(251, 191, 36, 0.1);
+  color: #fff;
+}
+
+.tab-button.active {
+  background: linear-gradient(135deg, rgba(185, 28, 28, 0.3) 0%, rgba(251, 191, 36, 0.2) 100%);
+  border-color: var(--iron-gold);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(251, 191, 36, 0.3);
+}
+
+/* Tab-specific active colors */
+.tab-button.active[data-tab="Swim"] {
+  border-color: #06b6d4;
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+}
+
+.tab-button.active[data-tab="Bike"] {
+  border-color: #f59e0b;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+}
+
+.tab-button.active[data-tab="Run"] {
+  border-color: #22c55e;
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+}
+
+.tab-button.active[data-tab="Other"] {
+  border-color: #a78bfa;
+  box-shadow: 0 0 15px rgba(167, 139, 250, 0.4);
+}
+
+.tab-icon {
+  font-size: 1.2rem;
+}
+
+.tab-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.tab-count {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.4rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  color: var(--arc-blue);
+}
+
+.tab-button.active .tab-count {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 .checklist-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -490,6 +568,13 @@
   letter-spacing: 0.1em;
   font-weight: 600;
 }
+
+/* Category-specific colors */
+.item-category[data-category="Swim"] { color: #06b6d4; } /* Cyan for swim */
+.item-category[data-category="Bike"] { color: #f59e0b; } /* Amber for bike */
+.item-category[data-category="Run"] { color: #22c55e; } /* Green for run */
+.item-category[data-category="Gear"] { color: var(--iron-gold); }
+.item-category[data-category="Logistics"] { color: #a78bfa; } /* Purple for logistics */
 
 .item-text {
   color: #fff;
@@ -567,6 +652,22 @@
 
   .checklist-grid {
     grid-template-columns: 1fr;
+  }
+
+  .tabs-container {
+    gap: 0.4rem;
+  }
+
+  .tab-button {
+    padding: 0.5rem 0.7rem;
+  }
+
+  .tab-label {
+    font-size: 0.65rem;
+  }
+
+  .tab-icon {
+    font-size: 1rem;
   }
 
   .arc-reactor-icon {
