@@ -7,7 +7,7 @@ export const CountdownTimer: React.FC = () => {
   const [seconds, setSeconds] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
 
-  const targetDate = new Date('2025-07-20T00:00:00').getTime();
+  const targetDate = new Date('2026-05-17T00:00:00').getTime();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -42,7 +42,7 @@ export const CountdownTimer: React.FC = () => {
   return (
     <div className="countdown-timer">
       <div className="target-date">
-        <h2>Countdown to July 20, 2025</h2>
+        <h2>Countdown to May 17, 2026</h2>
       </div>
       
       {isFinished ? (

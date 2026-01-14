@@ -4,7 +4,7 @@ import './App.css'
 function App() {
   return (
     <div className="app">
-      <h1>Tiempo para el iron man de Bryan</h1>
+      <h1>IRONMAN 70.3 Cap Cana </h1>
       <CountdownTimer />
     </div>
   )
