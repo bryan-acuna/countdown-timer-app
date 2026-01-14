@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { ThemeProvider } from './context/ThemeContext'
 import { NavBar } from './components/NavBar'
 import { HomePage } from './pages/HomePage'
 import { TrainingPage } from './pages/TrainingPage'
@@ -8,8 +9,9 @@ import './App.css'
 
 function App() {
   return (
-    <Router>
-      <div className="app">
+    <ThemeProvider>
+      <Router>
+        <div className="app">
         <NavBar />
         <main className="main-content">
           <Routes>
@@ -25,8 +27,9 @@ function App() {
           <p>POWERED BY BRYAN ACUNA</p>
           <div className="footer-line"></div>
         </footer>
-      </div>
-    </Router>
+        </div>
+      </Router>
+    </ThemeProvider>
   )
 }
 

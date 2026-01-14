@@ -1,12 +1,105 @@
+/* ======================== */
+/* DARK THEME (Default)     */
+/* ======================== */
+:root,
+[data-theme="dark"] {
+  /* Iron Man Colors */
+  --iron-red: #b91c1c;
+  --iron-red-bright: #dc2626;
+  --iron-gold: #fbbf24;
+  --iron-gold-light: #fcd34d;
+  --arc-blue: #38bdf8;
+  --arc-blue-glow: rgba(56, 189, 248, 0.6);
+  --iron-glow: rgba(251, 191, 36, 0.4);
+
+  /* Background Colors */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #1f1f1f;
+  --card-bg: #1f1f1f;
+
+  /* Text Colors */
+  --text-primary: rgba(255, 255, 255, 0.95);
+  --text-secondary: rgba(255, 255, 255, 0.87);
+  --text-muted: #888;
+
+  /* Border Colors */
+  --border-color: rgba(251, 191, 36, 0.2);
+  --border-strong: rgba(251, 191, 36, 0.5);
+
+  /* Navigation */
+  --nav-bg: linear-gradient(180deg, rgba(10, 10, 10, 0.98) 0%, rgba(10, 10, 10, 0.95) 100%);
+  --nav-border: rgba(185, 28, 28, 0.5);
+  --nav-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+
+  /* Interactive States */
+  --hover-bg: rgba(251, 191, 36, 0.1);
+  --hover-border: rgba(251, 191, 36, 0.3);
+  --active-bg: linear-gradient(135deg, rgba(185, 28, 28, 0.3) 0%, rgba(251, 191, 36, 0.2) 100%);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+
+  /* System */
+  color-scheme: dark;
+}
+
+/* ======================== */
+/* LIGHT THEME              */
+/* ======================== */
+[data-theme="light"] {
+  /* Iron Man Colors - adjusted for light mode */
+  --iron-red: #dc2626;
+  --iron-red-bright: #ef4444;
+  --iron-gold: #d97706;
+  --iron-gold-light: #f59e0b;
+  --arc-blue: #0891b2;
+  --arc-blue-glow: rgba(8, 145, 178, 0.4);
+  --iron-glow: rgba(217, 119, 6, 0.3);
+
+  /* Background Colors */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-tertiary: #e2e8f0;
+  --card-bg: #ffffff;
+
+  /* Text Colors */
+  --text-primary: #0f172a;
+  --text-secondary: #1e293b;
+  --text-muted: #64748b;
+
+  /* Border Colors */
+  --border-color: rgba(217, 119, 6, 0.2);
+  --border-strong: rgba(217, 119, 6, 0.4);
+
+  /* Navigation */
+  --nav-bg: linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(241, 245, 249, 0.95) 100%);
+  --nav-border: rgba(220, 38, 38, 0.3);
+  --nav-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+  /* Interactive States */
+  --hover-bg: rgba(217, 119, 6, 0.1);
+  --hover-border: rgba(217, 119, 6, 0.3);
+  --active-bg: linear-gradient(135deg, rgba(220, 38, 38, 0.15) 0%, rgba(217, 119, 6, 0.1) 100%);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* System */
+  color-scheme: light;
+}
+
+/* ======================== */
+/* BASE STYLES              */
+/* ======================== */
 :root {
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #0a0a0a;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -17,6 +110,13 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  color: var(--text-secondary);
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode background */
+[data-theme="dark"] body {
   background:
     radial-gradient(ellipse at top, rgba(185, 28, 28, 0.15) 0%, transparent 50%),
     radial-gradient(ellipse at bottom, rgba(251, 191, 36, 0.1) 0%, transparent 50%),
@@ -24,8 +124,17 @@ body {
   background-attachment: fixed;
 }
 
-/* Scanline effect overlay */
-body::before {
+/* Light mode background */
+[data-theme="light"] body {
+  background:
+    radial-gradient(ellipse at top, rgba(220, 38, 38, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom, rgba(217, 119, 6, 0.05) 0%, transparent 50%),
+    linear-gradient(180deg, #f8fafc 0%, #f1f5f9 50%, #f8fafc 100%);
+  background-attachment: fixed;
+}
+
+/* Scanline effect - only in dark mode */
+[data-theme="dark"] body::before {
   content: '';
   position: fixed;
   top: 0;
@@ -44,17 +153,24 @@ body::before {
   opacity: 0.3;
 }
 
+[data-theme="light"] body::before {
+  display: none;
+}
+
 a {
   font-weight: 500;
-  color: #fbbf24;
+  color: var(--iron-gold);
   text-decoration: inherit;
+  transition: color 0.3s ease;
 }
+
 a:hover {
-  color: #dc2626;
+  color: var(--iron-red);
 }
 
 h1, h2, h3 {
   font-weight: 700;
+  color: var(--text-primary);
 }
 
 h1 {
@@ -64,26 +180,26 @@ h1 {
 
 button {
   border-radius: 8px;
-  border: 1px solid #b91c1c;
+  border: 1px solid var(--iron-red);
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
-  color: #fbbf24;
+  background-color: var(--card-bg);
+  color: var(--iron-gold);
   cursor: pointer;
   transition: all 0.25s ease;
 }
 
 button:hover {
-  border-color: #fbbf24;
-  background-color: rgba(185, 28, 28, 0.2);
-  box-shadow: 0 0 15px rgba(185, 28, 28, 0.4);
+  border-color: var(--iron-gold);
+  background-color: var(--hover-bg);
+  box-shadow: 0 0 15px var(--iron-glow);
 }
 
 button:focus,
 button:focus-visible {
-  outline: 2px solid #fbbf24;
+  outline: 2px solid var(--iron-gold);
   outline-offset: 2px;
 }
 
@@ -92,7 +208,7 @@ button:focus-visible {
   position: absolute;
   width: 20px;
   height: 20px;
-  border-color: #fbbf24;
+  border-color: var(--iron-gold);
   border-style: solid;
   border-width: 0;
 }
@@ -155,7 +271,7 @@ button:focus-visible {
 }
 
 .race-ready {
-  color: #38bdf8;
+  color: var(--arc-blue);
   font-size: 1.2rem;
   margin-top: 0.5rem;
 }
@@ -163,7 +279,12 @@ button:focus-visible {
 /* Selection colors */
 ::selection {
   background: rgba(185, 28, 28, 0.5);
-  color: #fbbf24;
+  color: var(--iron-gold);
+}
+
+[data-theme="light"] ::selection {
+  background: rgba(220, 38, 38, 0.2);
+  color: var(--iron-red);
 }
 
 /* Scrollbar styling */
@@ -172,14 +293,14 @@ button:focus-visible {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: var(--bg-primary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #b91c1c, #fbbf24);
+  background: linear-gradient(180deg, var(--iron-red), var(--iron-gold));
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #dc2626, #fcd34d);
+  background: linear-gradient(180deg, var(--iron-red-bright), var(--iron-gold-light));
 }

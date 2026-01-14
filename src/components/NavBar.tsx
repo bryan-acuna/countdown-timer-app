@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom'
+import { useTheme } from '../context/ThemeContext'
 import './NavBar.css'
 
 const navItems = [
@@ -9,6 +10,8 @@ const navItems = [
 ]
 
 export const NavBar: React.FC = () => {
+  const { theme, toggleTheme } = useTheme()
+
   return (
     <nav className="navbar">
       <div className="nav-brand">
@@ -31,9 +34,15 @@ export const NavBar: React.FC = () => {
         ))}
       </div>
 
-      <div className="nav-status">
-        <span className="status-indicator"></span>
-        <span>ONLINE</span>
+      <div className="nav-actions">
+        <button className="theme-toggle" onClick={toggleTheme} title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
+          <span className="theme-icon">{theme === 'dark' ? '☀️' : '🌙'}</span>
+          <span className="theme-label">{theme === 'dark' ? 'LIGHT' : 'DARK'}</span>
+        </button>
+        <div className="nav-status">
+          <span className="status-indicator"></span>
+          <span>ONLINE</span>
+        </div>
       </div>
     </nav>
   )

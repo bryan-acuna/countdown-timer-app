@@ -1,15 +1,4 @@
-/* Iron Man Color Variables */
-:root {
-  --iron-red: #b91c1c;
-  --iron-red-bright: #dc2626;
-  --iron-gold: #fbbf24;
-  --iron-gold-light: #fcd34d;
-  --iron-dark: #0a0a0a;
-  --iron-metal: #1f1f1f;
-  --iron-glow: rgba(251, 191, 36, 0.4);
-  --arc-blue: #38bdf8;
-  --arc-blue-glow: rgba(56, 189, 248, 0.6);
-}
+/* App-specific styles - Theme variables are in index.css */
 
 #root {
   max-width: 1400px;
@@ -63,7 +52,7 @@
 }
 
 .page-subtitle {
-  color: #888;
+  color: var(--text-muted);
   font-size: 1rem;
   letter-spacing: 0.2em;
   margin-top: 0.5rem;
@@ -187,7 +176,8 @@
   padding: 3rem;
   border: 2px solid var(--iron-red);
   border-radius: 20px;
-  background: linear-gradient(135deg, rgba(185, 28, 28, 0.1) 0%, rgba(251, 191, 36, 0.05) 100%);
+  background: var(--card-bg);
+  transition: background 0.3s ease, border-color 0.3s ease;
   backdrop-filter: blur(10px);
   box-shadow:
     0 0 30px rgba(185, 28, 28, 0.3),
@@ -238,11 +228,12 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--bg-secondary);
   padding: 1rem 1.5rem;
   border-radius: 10px;
   border: 1px solid var(--iron-gold);
-  box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+  box-shadow: 0 0 15px var(--iron-glow);
+  transition: background 0.3s ease;
 }
 
 .time-unit {
@@ -334,7 +325,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 1.5rem 2.5rem;
-  background: linear-gradient(135deg, var(--iron-metal) 0%, var(--iron-dark) 100%);
+  background: var(--card-bg);
   border: 1px solid var(--iron-red);
   border-radius: 15px;
   transition: all 0.3s ease;
@@ -343,7 +334,7 @@
 
 .distance-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(185, 28, 28, 0.4);
+  box-shadow: var(--shadow-lg);
   border-color: var(--iron-gold);
 }
 
@@ -411,7 +402,7 @@
 
 .quote-text {
   font-size: 1.3rem;
-  color: #fff;
+  color: var(--text-primary);
   font-style: italic;
   margin: 0;
   padding-left: 2rem;
@@ -476,25 +467,25 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1rem;
-  background: var(--iron-metal);
-  border: 1px solid rgba(251, 191, 36, 0.3);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: #888;
+  color: var(--text-muted);
 }
 
 .tab-button:hover {
   border-color: var(--iron-gold);
-  background: rgba(251, 191, 36, 0.1);
-  color: #fff;
+  background: var(--hover-bg);
+  color: var(--text-primary);
 }
 
 .tab-button.active {
-  background: linear-gradient(135deg, rgba(185, 28, 28, 0.3) 0%, rgba(251, 191, 36, 0.2) 100%);
+  background: var(--active-bg);
   border-color: var(--iron-gold);
-  color: #fff;
-  box-shadow: 0 0 15px rgba(251, 191, 36, 0.3);
+  color: var(--text-primary);
+  box-shadow: 0 0 15px var(--iron-glow);
 }
 
 /* Tab-specific active colors */
@@ -551,8 +542,8 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.5rem;
-  background: var(--iron-metal);
-  border: 1px solid rgba(251, 191, 36, 0.2);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -560,12 +551,12 @@
 
 .checklist-item:hover {
   border-color: var(--iron-gold);
-  background: rgba(251, 191, 36, 0.1);
+  background: var(--hover-bg);
 }
 
 .checklist-item.completed {
   border-color: var(--arc-blue);
-  background: rgba(56, 189, 248, 0.1);
+  background: var(--hover-bg);
 }
 
 .checklist-item.completed .item-text {
@@ -619,7 +610,7 @@
 .item-category[data-category="Logistics"] { color: #a78bfa; } /* Purple for logistics */
 
 .item-text {
-  color: #fff;
+  color: var(--text-primary);
   font-size: 0.95rem;
   text-align: left;
 }
@@ -748,7 +739,7 @@
 }
 
 .training-card {
-  background: linear-gradient(135deg, var(--iron-metal) 0%, var(--iron-dark) 100%);
+  background: var(--card-bg);
   border: 1px solid var(--accent-color, var(--iron-red));
   border-radius: 15px;
   padding: 1.5rem;
@@ -757,7 +748,7 @@
 
 .training-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-lg);
 }
 
 .training-card-header {
@@ -767,7 +758,7 @@
   gap: 0.5rem;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .training-icon {
@@ -784,7 +775,7 @@
 .training-distance {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .training-tips {
@@ -809,9 +800,9 @@
   padding: 0.5rem 0;
   padding-left: 1.5rem;
   position: relative;
-  color: #ccc;
+  color: var(--text-secondary);
   font-size: 0.9rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .training-tips li::before {
@@ -827,13 +818,13 @@
   align-items: center;
   gap: 0.3rem;
   padding: 1rem;
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--bg-secondary);
   border-radius: 10px;
 }
 
 .goal-label {
   font-size: 0.7rem;
-  color: #888;
+  color: var(--text-muted);
   letter-spacing: 0.1em;
 }
 
@@ -860,8 +851,8 @@
   align-items: center;
   gap: 0.5rem;
   padding: 1.5rem 1rem;
-  background: var(--iron-metal);
-  border: 1px solid rgba(251, 191, 36, 0.2);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 10px;
   transition: all 0.3s ease;
 }
@@ -879,7 +870,7 @@
 
 .protocol-text {
   font-size: 0.85rem;
-  color: #ccc;
+  color: var(--text-secondary);
   text-align: center;
 }
 
@@ -930,7 +921,7 @@
 
 .quote-text-large {
   font-size: 1.8rem;
-  color: #fff;
+  color: var(--text-primary);
   font-style: italic;
   margin: 0;
   padding: 0 3rem;
@@ -956,10 +947,10 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.8rem 1.5rem;
-  background: var(--iron-metal);
+  background: var(--card-bg);
   border: 1px solid var(--iron-red);
   border-radius: 8px;
-  color: #fff;
+  color: var(--text-primary);
   font-size: 0.8rem;
   letter-spacing: 0.1em;
   cursor: pointer;
@@ -969,10 +960,11 @@
 .quote-nav-btn:hover {
   background: var(--iron-red);
   border-color: var(--iron-gold);
+  color: #fff;
 }
 
 .quote-counter {
-  color: #888;
+  color: var(--text-muted);
   font-size: 0.9rem;
   letter-spacing: 0.1em;
 }
@@ -991,8 +983,8 @@
 
 .quote-card {
   padding: 1.5rem;
-  background: var(--iron-metal);
-  border: 1px solid rgba(251, 191, 36, 0.2);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -1001,17 +993,17 @@
 
 .quote-card:hover {
   border-color: var(--iron-gold);
-  background: rgba(251, 191, 36, 0.1);
+  background: var(--hover-bg);
 }
 
 .quote-card.active {
   border-color: var(--iron-gold);
-  box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
-  background: linear-gradient(135deg, rgba(185, 28, 28, 0.2) 0%, rgba(251, 191, 36, 0.1) 100%);
+  box-shadow: 0 0 20px var(--iron-glow);
+  background: var(--active-bg);
 }
 
 .quote-card-text {
-  color: #fff;
+  color: var(--text-primary);
   font-size: 0.95rem;
   font-style: italic;
   margin: 0 0 0.8rem 0;
