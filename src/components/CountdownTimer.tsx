@@ -41,13 +41,20 @@ export const CountdownTimer: React.FC = () => {
 
   return (
     <div className="countdown-timer">
+      {/* HUD Corner Decorations */}
+      <div className="hud-corner top-left"></div>
+      <div className="hud-corner top-right"></div>
+      <div className="hud-corner bottom-left"></div>
+      <div className="hud-corner bottom-right"></div>
+
       <div className="target-date">
-        <h2>Countdown to May 17, 2026</h2>
+        <h2>RACE DAY: MAY 17, 2026</h2>
       </div>
-      
+
       {isFinished ? (
         <div className="finished-message">
-          <h3>🎉 The countdown is complete! 🎉</h3>
+          <h3>MISSION COMPLETE - RACE DAY IS HERE!</h3>
+          <p className="race-ready">Time to become an IRONMAN!</p>
         </div>
       ) : (
         <>
@@ -71,6 +78,11 @@ export const CountdownTimer: React.FC = () => {
               <span className="time-unit">{formatTime(seconds)}</span>
               <span className="time-label">Seconds</span>
             </div>
+          </div>
+
+          <div className="status-line">
+            <span className="status-dot"></span>
+            <span className="status-text">SYSTEMS ONLINE - TRAINING MODE ACTIVE</span>
           </div>
         </>
       )}
